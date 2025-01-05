@@ -1,6 +1,5 @@
 import re
 from typing import Optional
-from .tools_eval import is_valid_url
 
 __all__ = [
     'extract_url',
@@ -28,7 +27,7 @@ def extract_url(hyperlink: str) -> Optional[str]:
 def is_valid_url(url: str) -> bool:
     """Check if string is a valid URL."""
     pattern = r'^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$'
-    return bool(re.match(pattern, url)) 
+    return bool(re.match(pattern, url))
 
 def print_clickable_link(url, display_text):
     # Use the OSC 8 escape sequence to start the hyperlink
