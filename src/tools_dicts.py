@@ -4,7 +4,7 @@ import json
 import sys
 import traceback
 from typing import Any, Dict, List, Union, TypeVar
-from tools_eval import HasVal, AllHaveVal
+from .tools_eval import HasVal, AllHaveVal
 
 T = TypeVar('T')
 
