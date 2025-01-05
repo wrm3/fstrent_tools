@@ -3,11 +3,11 @@ from typing import Optional
 from .tools_eval import is_valid_url
 
 __all__ = [
-    'short_link',
-    'make_clickable',
     'extract_url',
     'is_valid_url',
-    'print_clickable_link'
+    'make_clickable',
+    'print_clickable_link',
+    'short_link'
 ]
 
 def short_link(url: str, display_text: Optional[str] = None) -> str:

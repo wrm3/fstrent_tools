@@ -3,16 +3,12 @@ import re
 from typing import Any, Dict, List, Optional, Union
 
 __all__ = [
-    # Value validation
     'HasVal',
     'AllHaveVal',
-    
-    # Format validation
-    'is_valid_email',
-    'is_valid_url',
-    'is_valid_path',
     'is_even',
-    'is_odd'
+    'is_odd',
+    'is_valid_email',
+    'is_valid_path'
 ]
 
 def HasVal(val: Any = None) -> bool:
