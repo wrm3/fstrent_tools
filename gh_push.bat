@@ -2,7 +2,7 @@
 echo GitHub Push Utility
 
 REM Get current version before any operations
-for /f "tokens=3" %%i in ('findstr /B "current_version" .bumpversion.cfg') do set INITIAL_VERSION=%%i
+for /f "tokens=3" %%i in ('findstr /B "current_version =" .bumpversion.cfg') do set INITIAL_VERSION=%%i
 echo Current version before any operations: v%INITIAL_VERSION%
 
 REM Get the bump type and commit message
@@ -20,7 +20,7 @@ if "%BUMP_TYPE%"=="none" (
     git commit -m "%MESSAGE%"
     
     REM Get current version before bump
-    for /f "tokens=3" %%i in ('findstr /B "current_version" .bumpversion.cfg') do set OLD_VERSION=%%i
+    for /f "tokens=3" %%i in ('findstr /B "current_version =" .bumpversion.cfg') do set OLD_VERSION=%%i
     echo Current version before bump: v%OLD_VERSION%
     
     REM Check PyPI version
@@ -34,7 +34,7 @@ if "%BUMP_TYPE%"=="none" (
         python -m bumpversion %BUMP_TYPE%
         
         REM Get new version after bump
-        for /f "tokens=3" %%i in ('findstr /B "current_version" .bumpversion.cfg') do set NEW_VERSION=%%i
+        for /f "tokens=3" %%i in ('findstr /B "current_version =" .bumpversion.cfg') do set NEW_VERSION=%%i
         echo Version bumped: v%OLD_VERSION% -^> v%NEW_VERSION%
     ) else (
         echo ERROR: Local version v%OLD_VERSION% does not match PyPI version v%PYPI_VERSION%
