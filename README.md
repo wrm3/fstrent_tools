@@ -1,4 +1,4 @@
-# FST Rent Tools
+# FSTrent Tools
 
 A collection of utility functions commonly used in Python scripts and projects, organized into specialized modules.
 
