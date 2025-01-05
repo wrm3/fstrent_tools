@@ -5,27 +5,21 @@ build-backend = "hatchling.build"
 [project]
 name = "fstrent_tools"
 version = "0.3.2"
-description = "A utility different tools I use for development"
-readme = "README.md"
 authors = [
-    { name = "Warren R Martel III", email = "wrmartel3@gmail.com" }
+  { name="FSTrent", email="your.email@example.com" },
 ]
-license = { file = "LICENSE" }
+description = "A collection of Python utility functions"
+readme = "README.md"
+requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-keywords = ["backup", "utility", "development"]
-dependencies = []
-requires-python = ">=3.7"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
 
 [project.urls]
-Homepage = "https://github.com/wrm3/fstrent_tools"
-Issues = "https://github.com/wrm3/fstrent_tools/issues"
-
-[tool.pytest.ini_options]
-addopts = "-ra -q"
-testpaths = [
-    "tests",
-] 
+"Homepage" = "https://github.com/yourusername/fstrent_tools"
+"Bug Tracker" = "https://github.com/yourusername/fstrent_tools/issues" 
