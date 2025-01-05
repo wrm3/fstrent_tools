@@ -1,7 +1,7 @@
 # fstrent_tools
 
 A comprehensive collection of Python utility functions.
-version: "0.5.8"
+version: "0.5.9"
 
 ## Modules
 
