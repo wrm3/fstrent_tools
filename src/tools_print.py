@@ -49,8 +49,10 @@ def banner_display(e, msg):
     return
 
 def clear_screen():
-    if os.name == 'nt':
+    if os.name == 'nt':  # Windows
         os.system('cls')
+    else:  # Mac/Linux
+        os.system('clear')
 
 def section_header(
     txt

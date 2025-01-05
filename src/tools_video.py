@@ -26,17 +26,18 @@ def play_video(video_file):
     cap.release()
     cv2.destroyAllWindows()
 
-def record_video(duration=5, output_file="output.avi", fps=30.0):
+def record_video(duration=5, output_file="output.avi", fps=30.0, camera_index=0):
     """
-    Records a video from the default camera.
+    Records a video from the specified camera.
 
     Args:
         duration (int, optional): The duration of the recording in seconds. Defaults to 5.
         output_file (str, optional): The path to the output video file. Defaults to 'output.avi'.
         fps (float, optional): The frames per second of the video. Defaults to 30.0.
+        camera_index (int, optional): Index of the camera to use. Defaults to 0.
     """
-    cap = cv2.VideoCapture(0)
-    fourcc = cv2.VideoWriter_fourcc(*"XVID")
+    cap = cv2.VideoCapture(camera_index)
+    fourcc = cv2.VideoWriter_fourcc(*'MJPG')
     out = cv2.VideoWriter(output_file, fourcc, fps, (640, 480))
 
     start_time = cv2.getTickCount()

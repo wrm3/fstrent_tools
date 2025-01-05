@@ -9,10 +9,31 @@ __all__ = [
     'short_link'
 ]
 
+def _supports_hyperlinks() -> bool:
+    """Check if the terminal supports hyperlinks."""
+    import os
+    
+    # Check if NO_COLOR is set (respecting the NO_COLOR standard)
+    if os.getenv('NO_COLOR') is not None:
+        return False
+        
+    # Check for known terminals that support hyperlinks
+    term = os.getenv('TERM', '')
+    if 'xterm' in term or 'vte' in term or 'kitty' in term:
+        return True
+        
+    # Check for Windows Terminal
+    if os.getenv('WT_SESSION'):
+        return True
+        
+    return False
+
 def short_link(url: str, display_text: Optional[str] = None) -> str:
     """Create a clickable terminal hyperlink with optional display text."""
     display = display_text or url
-    return f'\033]8;;{url}\033\\{display}\033]8;;\033\\'
+    if _supports_hyperlinks():
+        return f'\033]8;;{url}\033\\{display}\033]8;;\033\\'
+    return display  # Fallback to just showing the display text
 
 def make_clickable(text: str, url: str) -> str:
     """Make text clickable with a URL."""

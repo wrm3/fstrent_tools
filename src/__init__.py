@@ -21,7 +21,6 @@ from .tools_print import *
 from .tools_python import *
 from .tools_settings import *
 from .tools_sounds import *
-from .tools_speak import *
 from .tools_strings import *
 from .tools_terminal import *
 from .tools_time import *
@@ -32,7 +31,7 @@ from .tools_voice import *
 __all__ = []
 
 # Dynamically collect all exported names from imported modules
-for module_name in ['tools_convert', 'tools_debug', 'tools_decorators', 'tools_dicts', 'tools_errors', 'tools_eval', 'tools_files', 'tools_formatting', 'tools_hyperlinks', 'tools_json', 'tools_logging', 'tools_object', 'tools_print', 'tools_python', 'tools_settings', 'tools_sounds', 'tools_speak', 'tools_strings', 'tools_terminal', 'tools_time', 'tools_video', 'tools_voice']:
+for module_name in ['tools_convert', 'tools_debug', 'tools_decorators', 'tools_dicts', 'tools_errors', 'tools_eval', 'tools_files', 'tools_formatting', 'tools_hyperlinks', 'tools_json', 'tools_logging', 'tools_object', 'tools_print', 'tools_python', 'tools_settings', 'tools_sounds', 'tools_strings', 'tools_terminal', 'tools_time', 'tools_video', 'tools_voice']:
     module = globals().get(module_name)
     if module and hasattr(module, '__all__'):
         __all__.extend(module.__all__)

@@ -97,7 +97,7 @@ def logit(logname, epoch, msg=None):
 	logfile = 'logs/' + dttm_now + '_' + logname + '.log'
 
 	dir_val(logfile)
-	with open(logfile, 'a') as LogWriter:
+	with open(logfile, 'a', newline='') as LogWriter:
 		if isinstance(msg, str):
 			if msg == '':
 				LogWriter.writelines('\n')
@@ -108,7 +108,6 @@ def logit(logname, epoch, msg=None):
 		else:
 			LogWriter.write(pformat(msg))
 		LogWriter.writelines('\n')
-		LogWriter.close()
 	return
 
 def plogit(logname, epoch, msg=None, printyn='Y', logyn='Y'):
@@ -118,7 +117,7 @@ def plogit(logname, epoch, msg=None, printyn='Y', logyn='Y'):
 	logfile = 'logs/' + dttm_now + '_' + logname + '.log'
 
 	dir_val(logfile)
-	with open(logfile, 'a') as LogWriter:
+	with open(logfile, 'a', newline='') as LogWriter:
 		if isinstance(msg, str):
 			if msg == '':
 				if printyn == 'Y': print('')
@@ -132,5 +131,4 @@ def plogit(logname, epoch, msg=None, printyn='Y', logyn='Y'):
 			if printyn == 'Y': print(pformat(msg))
 			if logyn == 'Y': LogWriter.write(pformat(msg))
 		LogWriter.writelines('\n')
-		LogWriter.close()
 	return

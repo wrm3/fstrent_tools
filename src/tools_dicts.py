@@ -5,6 +5,7 @@ import sys
 import traceback
 from typing import Any, Dict, List, Union, TypeVar
 from .tools_eval import HasVal, AllHaveVal
+import os
 
 T = TypeVar('T')
 
@@ -203,10 +204,10 @@ def dict_upd(d, e, k, v):
     return d
 
 def print_dict(d):
-    print('')
-    print('')
+    print(os.linesep)
+    print(os.linesep)
     print(json.dumps(d, indent=4))
     print(d)
-    print('')
-    print('')
+    print(os.linesep)
+    print(os.linesep)
     return

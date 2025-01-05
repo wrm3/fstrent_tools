@@ -71,7 +71,7 @@ def is_valid_path(path: str) -> bool:
             return False
         
         # Check for invalid characters in Windows paths
-        if os.name == 'nt':
+        if os.name == 'nt':  # Windows-specific checks
             invalid_chars = '<>:"|?*'
             if any(char in path for char in invalid_chars):
                 return False
@@ -87,21 +87,12 @@ def is_valid_path(path: str) -> bool:
         # Try to create an absolute path
         abs_path = os.path.abspath(path)
         
-        # Check if the path is too long
+        # Check if the path is too long (Windows has a 260 character limit by default)
         if os.name == 'nt' and len(abs_path) > 260:
             return False
         
         return True
     except (TypeError, ValueError, AttributeError):
-        return False
-
-def is_valid_path(path: str) -> bool:
-    """Check if a path is valid for the current OS."""
-    try:
-        if os.path.sep == '\\':  # Windows
-            return '\\\\?\\' + os.path.abspath(path)
-        return os.path.abspath(path)
-    except:
         return False
 
 def file_copy(src: Union[str, Path], dst: Union[str, Path]) -> bool:
@@ -150,7 +141,7 @@ def file_read(file_path):
         str: The contents of the file, or None if the file does not exist.
     """
     try:
-        with open(file_path, "r") as f:
+        with open(file_path, "r", encoding='utf-8') as f:
             return f.read()
     except FileNotFoundError:
         return None
@@ -158,7 +149,7 @@ def file_read(file_path):
 def file_read_safe(filepath: str, default: Any = None) -> Optional[str]:
     """Safely read file content with error handling."""
     try:
-        with open(filepath, 'r') as f:
+        with open(filepath, 'r', encoding='utf-8') as f:
             return f.read()
     except IOError:
         return default
@@ -179,11 +170,11 @@ def file_write(file_path: str, content: str, mode: str = 'w', encoding: str = 'u
     except (IOError, OSError) as e:
         return False
 
-def file_write_safe(filepath: str, content: str, mode: str = 'w') -> bool:
+def file_write_safe(filepath: str, content: str, mode: str = 'w', encoding: str = 'utf-8') -> bool:
     """Safely write content to file with directory creation if needed."""
     try:
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
-        with open(filepath, mode) as f:
+        with open(filepath, mode, encoding=encoding) as f:
             f.write(content)
         return True
     except IOError:

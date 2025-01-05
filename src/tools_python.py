@@ -2,6 +2,7 @@ import subprocess
 import sys
 import pkg_resources
 import os
+import tempfile
 
 __all__ = [
     'execute_python_script',
@@ -87,30 +88,32 @@ def run_python_code(code):
         str: The output of the code execution.
     """
     try:
-        # Redirect stdout and stderr to capture output
-        old_stdout = sys.stdout
-        old_stderr = sys.stderr
-        sys.stdout = captured_output = open("temp_output.txt", "w+")
-        sys.stderr = captured_error = open("temp_error.txt", "w+")
+        # Create temporary files using system temp directory
+        with tempfile.NamedTemporaryFile(mode='w+', delete=False) as captured_output, \
+             tempfile.NamedTemporaryFile(mode='w+', delete=False) as captured_error:
+            
+            # Redirect stdout and stderr
+            old_stdout = sys.stdout
+            old_stderr = sys.stderr
+            sys.stdout = captured_output
+            sys.stderr = captured_error
 
-        # Execute the code
-        exec(code)
+            # Execute the code
+            exec(code)
 
-        # Restore stdout and stderr
-        sys.stdout = old_stdout
-        sys.stderr = old_stderr
+            # Restore stdout and stderr
+            sys.stdout = old_stdout
+            sys.stderr = old_stderr
 
-        # Read and return captured output
-        captured_output.seek(0)
-        output = captured_output.read()
-        captured_error.seek(0)
-        error = captured_error.read()
+            # Read captured output
+            captured_output.seek(0)
+            output = captured_output.read()
+            captured_error.seek(0)
+            error = captured_error.read()
 
-        # Clean up temporary files
-        captured_output.close()
-        captured_error.close()
-        os.remove("temp_output.txt")
-        os.remove("temp_error.txt")
+        # Clean up temporary files (they are closed automatically by the context manager)
+        os.unlink(captured_output.name)
+        os.unlink(captured_error.name)
 
         if error:
             return f"Error: {error}\nOutput: {output}"

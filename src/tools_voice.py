@@ -11,6 +11,8 @@ import hashlib
 import time
 import speech_recognition as sr
 import subprocess
+import shutil
+from pathlib import Path
 
 
 __all__ = [
@@ -103,19 +105,27 @@ def list_voices() -> List[dict]:
         })
     return voices
 
-def speak(text, lang='en'):
+def speak(text: str, lang='en'):
     """
     Converts text to speech and plays the audio.
+    Uses pyttsx3 for faster local processing.
 
     Args:
-        text (str): The text to convert to speech.
-        lang (str, optional): The language of the text. Defaults to 'en'.
+        text (str): The text to convert to speech
+        lang (str, optional): Language code (only used for gTTS fallback)
     """
-    tts = gTTS(text=text, lang=lang)
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as fp:
-        tts.save(fp.name)
-        playsound.playsound(fp.name)
-        os.remove(fp.name)
+    try:
+        engine = _get_engine()
+        engine.say(text)
+        engine.runAndWait()
+    except Exception as e:
+        print(f"pyttsx3 failed, falling back to gTTS: {e}")
+        # Fallback to gTTS
+        tts = gTTS(text=text, lang=lang)
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as fp:
+            tts.save(fp.name)
+            playsound.playsound(fp.name)
+            os.remove(fp.name)
 
 async def speak_async(text, lang='en'):
     """
@@ -204,6 +214,9 @@ def convert_audio(input_path, output_path, output_format):
         output_path (str): The path to the output audio file.
         output_format (str): The desired output format (e.g., 'mp3', 'wav').
     """
+    if not _check_ffmpeg():
+        raise RuntimeError("ffmpeg is not installed or not found in PATH")
+    
     try:
         subprocess.run(['ffmpeg', '-i', input_path, '-vn', '-acodec', output_format, output_path], check=True)
     except subprocess.CalledProcessError as e:
@@ -305,20 +318,9 @@ def add_audio_to_video(video_path, audio_path, output_path):
     except subprocess.CalledProcessError as e:
         print(f"Error adding audio to video: {e}")
 
-def speak(tempmessage):
-    print(f'speaking : {tempmessage}...')
-    engine = pyttsx3.init()
-    voices = engine.getProperty('voices')
-    engine.setProperty('voice', voices[0].id)  # changing index changes voices but only 0 and 1 are working here
-    engine.setProperty('rate', 120)  # 120 words per minute
-    engine.setProperty('volume', 0.9)
-    engine.say(tempmessage)
-    engine.runAndWait()
-
-def speak_async(tempmessage):
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        future = executor.submit(speak, tempmessage)
-        return future
+def _check_ffmpeg():
+    """Check if ffmpeg is available in the system."""
+    return shutil.which('ffmpeg') is not None
 
 def _cleanup_cache():
     """Clean up old cached speech files."""

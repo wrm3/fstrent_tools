@@ -85,12 +85,8 @@ def temp_timer_end(t):
 
 def utc_now():
     import datetime
-    utc_now = datetime.datetime.now(datetime.UTC)
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
     return utc_now
-
-def dttm_get():
-    dttm_str = dt.now().strftime('%Y-%m-%d %H:%M:%S')
-    return dttm_str
 
 def dttm_get():
     dttm_str = dt.now().strftime('%Y-%m-%d %H:%M:%S')

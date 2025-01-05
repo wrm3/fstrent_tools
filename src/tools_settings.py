@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 __all__ = [
     'DEFAULT_SETTINGS_PATH',
@@ -10,7 +11,7 @@ __all__ = [
     'update_settings'
 ]
 
-DEFAULT_SETTINGS_PATH = "settings.json"
+DEFAULT_SETTINGS_PATH = Path("settings.json")
 
 def get_setting(key, default=None, file_path=DEFAULT_SETTINGS_PATH):
     """

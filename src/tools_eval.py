@@ -50,9 +50,11 @@ def is_valid_email(email: str) -> bool:
 def is_valid_path(path: str) -> bool:
     """Check if string is a valid file system path."""
     try:
-        return os.path.exists(os.path.dirname(path))
+        # Normalize the path to handle different path separators
+        normalized_path = os.path.normpath(path)
+        return os.path.exists(os.path.dirname(normalized_path))
     except:
-        return False 
+        return False
 
 def is_even(number: int) -> bool:
     return number % 2 == 0
