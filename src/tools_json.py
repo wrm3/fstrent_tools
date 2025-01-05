@@ -1,6 +1,6 @@
 import json
 import decimal
-from tools_files import dir_val
+from .tools_files import dir_val
 
 __all__ = [
     'format_json',

@@ -3,7 +3,7 @@ from pprint import pprint
 import sys
 import traceback
 import decimal
-from tools_object import EmptyObject
+from .tools_object import EmptyObject
 from typing import Any
 
 __all__ = [

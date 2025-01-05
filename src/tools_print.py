@@ -1,7 +1,7 @@
 import os
 from datetime import datetime as dt
-from tools_logging import plogit
-from tools_time import dttm_get
+from .tools_logging import plogit
+from .tools_time import dttm_get
 from fstrent_colors import cp
 
 __all__ = [

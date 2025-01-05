@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime as dt
 from pprint import pformat
-from tools_files import dir_val
+from .tools_files import dir_val
 
 __all__ = [
     'setup_logger',
