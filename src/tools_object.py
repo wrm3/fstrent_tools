@@ -1,6 +1,7 @@
 import sys
 
 __all__ = [
+    'EmptyObject',
     'compare_objects',
     'get_object_attributes',
     'get_object_methods',
@@ -9,6 +10,9 @@ __all__ = [
     'is_object_empty',
     'print_obj'
 ]
+
+class EmptyObject:
+    pass
 
 def compare_objects(obj1, obj2):
     """
