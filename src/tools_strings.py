@@ -4,6 +4,7 @@ __all__ = [
     'IsEnglish',
     'strip_formatting',
     'format_disp_age',
+    'format_disp_age2',
     'truncate_string',
     'snake_to_camel',
     'camel_to_snake',
