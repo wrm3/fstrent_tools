@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fstrent_tools"
-version = "0.7.0"
+version = "0.7.1"
 authors = [
   { name="FSTrent", email="wrmartel3@gmail.com" },
 ]
