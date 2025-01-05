@@ -15,9 +15,16 @@ if "%BUMP_TYPE%"=="none" (
     REM Commit current changes first
     git commit -m "%MESSAGE%"
     
+    REM Get current version before bump
+    for /f "tokens=3" %%i in ('type .bumpversion.cfg ^| findstr "current_version"') do set OLD_VERSION=%%i
+    
     REM Now do the version bump (working directory will be clean)
-    echo Bumping %BUMP_TYPE% version...
+    echo Bumping %BUMP_TYPE% version from v%OLD_VERSION%...
     python -m bumpversion %BUMP_TYPE%
+    
+    REM Get new version after bump
+    for /f "tokens=3" %%i in ('type .bumpversion.cfg ^| findstr "current_version"') do set NEW_VERSION=%%i
+    echo Version bumped: v%OLD_VERSION% -^> v%NEW_VERSION%
 )
 
 REM Push to main branch with tags
