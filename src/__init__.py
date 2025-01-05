@@ -4,7 +4,33 @@ fstrent_tools - A comprehensive collection of Python utility functions.
 
 __version__ = "0.3.3"
 
-# Import all tools modules
+# Import all submodules
+from . import (
+    tools_convert,
+    tools_debug,
+    tools_decorators,
+    tools_dicts,
+    tools_errors,
+    tools_eval,
+    tools_files,
+    tools_formatting,
+    tools_hyperlinks,
+    tools_json,
+    tools_logging,
+    tools_object,
+    tools_print,
+    tools_python,
+    tools_settings,
+    tools_sounds,
+    tools_speak,
+    tools_strings,
+    tools_terminal,
+    tools_time,
+    tools_video,
+    tools_voice
+)
+
+# Import all from submodules
 from .tools_convert import *
 from .tools_debug import *
 from .tools_decorators import *
