@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 
 setup(
     name="fstrent_tools",
-    version="0.4.0",
-    packages=find_packages(where="src"),
-    package_dir={"fstrent_tools": "src"},
+    version="0.5.0",
+    packages=['fstrent_tools'],
+    package_dir={'fstrent_tools': 'src'},
     include_package_data=True,
     package_data={
         'fstrent_tools': ['../sounds/*.wav', '../sounds/*.WAV'],
