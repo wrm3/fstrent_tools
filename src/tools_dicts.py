@@ -24,7 +24,8 @@ __all__ = [
     'DictKeyDel',
     'DictKeyVal',
     'DictKeyValMult',
-    'DictValCheck'
+    'DictValCheck',
+    'DictKey'
 ]
 
 class AttrDict(dict):
@@ -131,6 +132,15 @@ def DictKeyValFill(in_dict: Dict, k: str, v: Any) -> Any:
         traceback.print_exc()
         sys.exit(1)
 
+def DictKey(in_dict: Dict, k: str) -> bool:
+    """Check if key exists in dictionary."""
+    try:
+        return k in in_dict
+    except Exception as e:
+        print(f'DictKey ==> errored... {e}')
+        traceback.print_exc()
+        sys.exit(1)
+
 def DictKeyVal(in_dict: Dict, k: str) -> bool:
     """Check if key exists in dictionary."""
     try:
@@ -200,4 +210,3 @@ def print_dict(d):
     print('')
     print('')
     return
-
