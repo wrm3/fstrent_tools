@@ -2,7 +2,7 @@
 fstrent_tools - A comprehensive collection of Python utility functions.
 """
 
-__version__ = "0.3.6"
+__version__ = "0.3.7"
 
 # Import specific functions you want to expose at package level
 from .tools_json import load_json, save_json
