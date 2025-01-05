@@ -1,7 +1,7 @@
 import datetime
 import time
 from datetime import datetime as dt
-from .tools_files import logit
+from .tools_logging import logit
 
 __all__ = [
     'temp_timing_begin',

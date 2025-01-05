@@ -10,8 +10,6 @@ __all__ = [
     'create_directory',
     'dir_val',
     'ensure_dir',
-    'get_file_age_minutes',
-    'is_valid_path',
     'file_copy',
     'file_delete',
     'file_list',
@@ -19,8 +17,10 @@ __all__ = [
     'file_read',
     'file_read_safe',
     'file_write',
-    'file_write_safe'
-    ]
+    'file_write_safe',
+    'get_file_age_minutes',
+    'is_valid_path'
+]
 
 
 def create_directory(directory_path):
