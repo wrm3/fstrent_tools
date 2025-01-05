@@ -20,8 +20,4 @@ colorama>=0.4.6      # For tools_print colored output
 psutil>=5.9.0        # For system utilities
 pyperclip>=1.8.2     # For clipboard operations
 tqdm>=4.65.0         # For progress bars
-
-# Optional dependencies
-# Uncomment if you need these features
-# pygame>=2.1.0      # Alternative sound backend
-# pydub>=0.25.1      # Advanced audio processing 
+traceback2>=1.1.0    # For tools_errors

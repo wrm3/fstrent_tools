@@ -152,19 +152,9 @@ def DictKeyDel(in_dict: Dict, k: str) -> bool:
         traceback.print_exc()
         sys.exit(1)
 
-def DictKeyValMult(in_dict, ks):
-    '''
-    Returns Boolean if all key in ks return True using DictKeyVal function
-    '''
-    resp = True
-    for k in ks:
-        if k not in in_dict:
-            resp = False
-            break
-        elif not DictKeyVal(in_dict, k):
-            resp = False
-            break
-    return resp
+def DictKeyValMult(in_dict: Dict, ks: List[str]) -> bool:
+    """Check if all keys exist and have non-None values."""
+    return all(DictKeyVal(in_dict, k) for k in ks)
 
 def DictContainsKeys(in_dict: Dict = {}, ks: Union[str, List[str]] = []) -> bool:
     """
@@ -175,35 +165,27 @@ def DictContainsKeys(in_dict: Dict = {}, ks: Union[str, List[str]] = []) -> bool
         ks = [ks]
     return set(ks).issubset(in_dict.keys())
 
-def DictValCheck(in_dict={}, ks=[], show_yn='N'):
-    '''
-    Returns Boolean to verify all values in dict have value using HaveValue function
-    ks - allows specified keys to be returned
-    '''
-    if HasVal(ks):
-        resp = True
-        if isinstance(ks, list):
-            for k in ks:
-                if k in in_dict:
-                    v = in_dict[k]
-                    if not HasVal(v):
-                        if show_yn == 'Y':
-                            print('{} : {}'.format(k,v))
-                        resp=False
-                else:
-                    resp = False
-                    return resp
-        elif isinstance(ks, str):
-            if ks in in_dict:
-                v = in_dict[ks]
-                if not HasVal(v):
-                    if show_yn == 'Y':
-                        print('{} : {}'.format(ks,v))
-                    resp=False
-            else:
-                resp = False
-                return resp
-    return resp
+def DictValCheck(in_dict: Dict = {}, ks: Union[str, List[str]] = [], show_yn: str = 'N') -> bool:
+    """
+    Verify all specified values in dict have value.
+    ks - allows specified keys to be checked
+    show_yn - if 'Y', prints keys with no value
+    """
+    if not HasVal(ks):
+        return True
+        
+    if isinstance(ks, str):
+        ks = [ks]
+        
+    for k in ks:
+        if k not in in_dict:
+            return False
+        v = in_dict[k]
+        if not HasVal(v):
+            if show_yn == 'Y':
+                print(f'{k} : {v}')
+            return False
+    return True
 
 def dict_upd(d, e, k, v):
     if not e in d: d[e] = {}

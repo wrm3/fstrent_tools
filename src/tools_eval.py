@@ -51,40 +51,6 @@ def AllHaveVal(vals: Optional[Union[Any, List[Any]]] = None, itemize_yn: str = '
         return True
     return HasVal(vals)
 
-def DictKeyVal(in_dict: Dict, k: str) -> bool:
-    """Check if key exists in dictionary and has a non-None value."""
-    try:
-        return k in in_dict and HasVal(in_dict[k])
-    except Exception as e:
-        print(f'DictKeyVal ==> errored... {e}')
-        return False
-
-def DictKeyValMult(in_dict: Dict, ks: List[str]) -> bool:
-    """Check if all keys exist and have non-None values."""
-    return all(DictKeyVal(in_dict, k) for k in ks)
-
-def DictValCheck(in_dict: Dict = {}, ks: Union[str, List[str]] = [], show_yn: str = 'N') -> bool:
-    """
-    Verify all specified values in dict have value.
-    ks - allows specified keys to be checked
-    show_yn - if 'Y', prints keys with no value
-    """
-    if not HasVal(ks):
-        return True
-        
-    if isinstance(ks, str):
-        ks = [ks]
-        
-    for k in ks:
-        if k not in in_dict:
-            return False
-        v = in_dict[k]
-        if not HasVal(v):
-            if show_yn == 'Y':
-                print(f'{k} : {v}')
-            return False
-    return True
-
 def is_valid_email(email: str) -> bool:
     """Check if string is a valid email address."""
     pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'

@@ -3,6 +3,7 @@ import time
 from datetime import datetime
 from typing import Any, Dict, Type, TypeVar
 from fstrent_colors import cp
+import traceback
 
 T = TypeVar('T')
 
@@ -13,7 +14,7 @@ __all__ = [
     'log_class',
     'singleton',
     # Function decorators
-    'time_it'
+    'my_func'
 ]
 
 def timing_class(cls: Type[T]) -> Type[T]:
@@ -153,12 +154,14 @@ def singleton(cls: Type[T]) -> Type[T]:
     
     return get_instance
 
-def time_it(secs_max: float = 0.33):
+def my_func(secs_max: float = 0.33, catch_errors: bool = False, halt_on_error: bool = True):
     """
-    Decorator that times function execution and logs if it exceeds maximum time.
-
+    Decorator that times function execution, logs if it exceeds maximum time, and optionally handles errors.
+    
     Args:
         secs_max (float): Maximum expected execution time in seconds
+        catch_errors (bool): If True, catches and logs any errors that occur
+        halt_on_error (bool): If True and catch_errors is True, raises the error after logging
     """
     def decorator(func):
         @functools.wraps(func)
@@ -167,19 +170,39 @@ def time_it(secs_max: float = 0.33):
             t0 = time.perf_counter()
             strt_dttm = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-            # Execute function
-            result = func(*args, **kwargs)
+            try:
+                # Execute function
+                result = func(*args, **kwargs)
 
-            # End timing
-            end_dttm = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            secs = round(time.perf_counter() - t0, 3)
+                # End timing
+                end_dttm = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                secs = round(time.perf_counter() - t0, 3)
 
-            # Log if execution time exceeds maximum
-            if secs_max >= 0 and secs > secs_max:
-                msg = f"{func.__name__:<35} began at {strt_dttm} completed at {end_dttm}, taking {secs} seconds... max : {secs_max} * {func.__qualname__}"
-                cp(msg, font_clr='white', bg_clr='red')
+                # Log if execution time exceeds maximum
+                if secs_max >= 0 and secs > secs_max:
+                    msg = f"{func.__name__:<35} began at {strt_dttm} completed at {end_dttm}, taking {secs} seconds... max : {secs_max} * {func.__qualname__}"
+                    cp(msg, font='white', bg_color='red')
 
-            return result
+                return result
+
+            except Exception as e:
+                if catch_errors:
+                    # Get the full traceback
+                    error_msg = f"\nError in {func.__name__}:\n"
+                    error_msg += f"Started at: {strt_dttm}\n"
+                    error_msg += f"Error: {str(e)}\n"
+                    error_msg += "Traceback:\n"
+                    error_msg += traceback.format_exc()
+                    
+                    # Print error in red
+                    cp(error_msg, font='white', bg_color='red')
+                    
+                    if halt_on_error:
+                        raise  # Re-raise the exception if halt_on_error is True
+                    return None  # Return None if we're continuing after error
+                else:
+                    raise  # Re-raise the exception if we're not catching errors
+
         return wrapper
     return decorator
 

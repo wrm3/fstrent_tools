@@ -178,11 +178,16 @@ def int_2_tf(val):
     return val
 
 def tf(val):
-    if val == 1:
-        tf = True
+    if val == 'true' or val == 'True' or val == 'TRUE':
+        return True
+    elif val == 1 or val == '1' or val == dec(1):
+        return True
+    elif val == 'false' or val == 'False' or val == 'FALSE':
+        return False
+    elif val == 0 or val == '0' or val == dec(0):
+        return False
     else:
-        tf = False
-    return tf
+        return False
 
 def tf_2_int(val):
     if val:
