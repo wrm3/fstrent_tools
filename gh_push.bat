@@ -16,7 +16,8 @@ if not "%BUMP_TYPE%"=="none" (
 )
 
 REM Push to main branch with tags
-git push origin main --tags
+git push
+git push --tags
 
 echo Done!
 pause
