@@ -1,9 +1,12 @@
 import winsound
 import time
 from fstrent_colors import cp
+import os
+import pkg_resources
 
 __all__ = [
     'beep',
+    'beep_old',
     'play_beep',
     'play_cash',
     'play_doh',
@@ -92,14 +95,17 @@ def play_sw_imperial_march():
 def play_file(f):
     winsound.PlaySound(f, winsound.SND_FILENAME)
 
+def get_sound_path(filename):
+    return pkg_resources.resource_filename('fstrent_tools', os.path.join('..', 'sounds', filename))
+
 def play_cash():
     print('play_cash()')
-    play_file('sounds/cashreg.wav')
+    play_file(get_sound_path('cashreg.wav'))
 
 def play_doh():
     print('play_doh()')
-    play_file('sounds/DOH!.WAV')
+    play_file(get_sound_path('DOH!.WAV'))
 
 def play_thunder():
     print('play_thunder()')
-    play_file('sounds/thunder.wav')
+    play_file(get_sound_path('thunder.wav'))

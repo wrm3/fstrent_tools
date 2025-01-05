@@ -1,3 +1,4 @@
-include fstrent_tools/sounds/*.wav
+include sounds/*.wav
+include sounds/*.WAV
 include README.md
 include LICENSE 

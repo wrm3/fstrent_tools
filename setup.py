@@ -3,10 +3,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="fstrent_tools",
-    version="0.3.9",
-    packages=find_packages(),
-    package_dir={"": "src"},
+    version="0.4.0",
+    packages=find_packages(where="src"),
+    package_dir={"fstrent_tools": "src"},
     include_package_data=True,
+    package_data={
+        'fstrent_tools': ['../sounds/*.wav', '../sounds/*.WAV'],
+    },
     author="FSTrent",
     author_email="wrmartel3@gmail.com",
     description="Tools for Python Development",

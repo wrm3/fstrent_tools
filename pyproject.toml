@@ -17,9 +17,6 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-[tool.hatch.build.targets.wheel]
-packages = ["src"]
-
 [project.urls]
 "Homepage" = "https://github.com/wrm3/fstrent_tools"
 "Bug Tracker" = "https://github.com/wrm3/fstrent_tools/issues" 
