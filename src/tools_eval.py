@@ -7,11 +7,6 @@ __all__ = [
     'HasVal',
     'AllHaveVal',
     
-    # Dictionary validation
-    'DictKeyVal',
-    'DictKeyValMult',
-    'DictValCheck',
-    
     # Format validation
     'is_valid_email',
     'is_valid_url',
