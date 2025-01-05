@@ -2,7 +2,7 @@
 fstrent_tools - A comprehensive collection of Python utility functions.
 """
 
-__version__ = "0.5.1"
+__version__ = "0.5.2"
 
 # Import all functions from each module
 from .tools_convert import *
