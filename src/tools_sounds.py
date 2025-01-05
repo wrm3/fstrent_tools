@@ -6,7 +6,6 @@ import numpy as np
 
 __all__ = [
     'beep',
-    'beep_old',
     'play_beep',
     'play_file',
     'play_cash',
