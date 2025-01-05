@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="fstrent_tools",
-    version="0.5.23",
+    version="0.5.24",
     packages=['fstrent_tools'],
     package_dir={'fstrent_tools': 'src'},
     include_package_data=True,
