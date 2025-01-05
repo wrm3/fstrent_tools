@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 
 setup(
     name="fstrent_tools",
-    version="0.3.4",
-    packages=find_packages(where="src"),
-    package_dir={"fstrent_tools": "src"},
+    version="0.3.9",
+    packages=find_packages(),
+    package_dir={"": "src"},
     include_package_data=True,
     author="FSTrent",
     author_email="wrmartel3@gmail.com",
