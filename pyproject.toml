@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "fstrent_tools"
-version = "0.3.1"
+version = "0.3.2"
 description = "A utility different tools I use for development"
 readme = "README.md"
 authors = [
