@@ -10,6 +10,7 @@ __all__ = [
     'log_error',
     'log_debug',
     'log_exception',
+    'logit',
     'plogit'
 ]
 
@@ -88,6 +89,27 @@ def log_exception(logger, message):
         message (str): The message to log.
     """
     logger.exception(message)
+
+def logit(logname, epoch, msg=None):
+	dttm_now = dt.now().strftime('%Y_%m_%d')
+	prt_dttm_now = dt.now().strftime('%Y-%m-%d %H:%M:%S')
+
+	logfile = 'logs/' + dttm_now + '_' + logname + '.log'
+
+	dir_val(logfile)
+	with open(logfile, 'a') as LogWriter:
+		if isinstance(msg, str):
+			if msg == '':
+				LogWriter.writelines('\n')
+			else:
+				m = '{} ({}) ==> {}'
+				fmsg = m.format(prt_dttm_now, epoch, msg)
+				LogWriter.writelines(fmsg)
+		else:
+			LogWriter.write(pformat(msg))
+		LogWriter.writelines('\n')
+		LogWriter.close()
+	return
 
 def plogit(logname, epoch, msg=None, printyn='Y', logyn='Y'):
 	dttm_now = dt.now().strftime('%Y_%m_%d')
