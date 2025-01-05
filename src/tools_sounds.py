@@ -8,22 +8,23 @@ __all__ = [
     'beep',
     'beep_old',
     'play_beep',
+    'play_file',
     'play_cash',
     'play_doh',
-    'play_file',
+    'play_sw_theme',
     'play_sw_imperial_march',
-    'play_sw_theme'
+    'play_thunder'
 ]
-
-def beep_old():
-    frequency = 2500  # Set Frequency To 2500 Hertz
-    duration = 1000  # Set Duration To 1000 ms == 1 second
-    winsound.Beep(frequency, duration)
 
 def beep(reps=1):
     for _ in range(0, reps, 1):
         cp('beep()!!!', font='white', bg_color='red')
     play_beep(frequency=2500,duration=1000, reps=reps)
+
+def beep_old():
+    frequency = 2500  # Set Frequency To 2500 Hertz
+    duration = 1000  # Set Duration To 1000 ms == 1 second
+    winsound.Beep(frequency, duration)
 
 def play_beep(frequency=1000, duration=1000, reps=1):
     """
@@ -38,6 +39,17 @@ def play_beep(frequency=1000, duration=1000, reps=1):
         return
     for _ in range(0, reps, 1):
         winsound.Beep(frequency, duration)
+
+def play_file(f):
+    winsound.PlaySound(f, winsound.SND_FILENAME)
+
+def play_cash():
+    print('play_cash()')
+    play_file(get_sound_path('cashreg.wav'))
+
+def play_doh():
+    print('play_doh()')
+    play_file(get_sound_path('DOH!.WAV'))
 
 def play_sw_theme():
     """
@@ -92,20 +104,10 @@ def play_sw_imperial_march():
     play_beep(523, 150)
     play_beep(440, 1000)
 
-def play_file(f):
-    winsound.PlaySound(f, winsound.SND_FILENAME)
+def play_thunder():
+    print('play_thunder()')
+    play_file(get_sound_path('thunder.wav'))
 
 def get_sound_path(filename):
     return pkg_resources.resource_filename('fstrent_tools', os.path.join('..', 'sounds', filename))
 
-def play_cash():
-    print('play_cash()')
-    play_file(get_sound_path('cashreg.wav'))
-
-def play_doh():
-    print('play_doh()')
-    play_file(get_sound_path('DOH!.WAV'))
-
-def play_thunder():
-    print('play_thunder()')
-    play_file(get_sound_path('thunder.wav'))
