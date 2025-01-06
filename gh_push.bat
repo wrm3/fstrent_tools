@@ -9,13 +9,6 @@ REM Get current version before any operations
 for /f "tokens=3" %%i in ('findstr /B "current_version =" .bumpversion.cfg') do set INITIAL_VERSION=%%i
 echo Current version in .bumpversion.cfg: v%INITIAL_VERSION%
 
-REM Verify versions match before proceeding
-if not "%INITIAL_VERSION%"=="%PYPI_VERSION%" (
-    echo ERROR: Local version v%INITIAL_VERSION% does not match PyPI version v%PYPI_VERSION%
-    echo Please sync versions before continuing
-    exit /b 1
-)
-
 REM Get the bump type and commit message
 set /p BUMP_TYPE="Enter bump type (major/minor/patch) or none: "
 set /p MESSAGE="Enter commit message: "
